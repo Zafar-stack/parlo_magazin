@@ -23,7 +23,7 @@ class Size(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=208, blank=True)
-    level = models.IntegerField(max_length=280, blank=True, default=0)
+    level = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return f'{self.title}'
