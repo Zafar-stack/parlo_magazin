@@ -11,3 +11,4 @@ class AdminModelSingle(admin.ModelAdmin):
 admin.site.register(Color, AdminModelSingle)
 admin.site.register(Size, AdminModelSingle)
 admin.site.register(Tag, AdminModelSingle)
+admin.site.register(Good, AdminModelSingle)
