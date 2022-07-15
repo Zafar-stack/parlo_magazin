@@ -77,6 +77,6 @@ class Good(models.Model):
     #brand = models.ForeignKey(CategoryBrand, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.category} -> {self.title} -> {self.color.title} -> {self.size.title}'
+        return f'{self.category} + "-->" + {self.title} + "-->" + {self.color.title} + "-->" + {self.size.title}'
 
 
