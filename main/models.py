@@ -7,6 +7,7 @@ class Color(models.Model):
     title = models.CharField(max_length=208, blank=True)
     code = models.CharField(max_length=280, blank=True)
     level = models.IntegerField(blank=True, default=0)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
@@ -16,6 +17,7 @@ class Size(models.Model):
     title = models.CharField(max_length=208, blank=True)
     code = models.CharField(max_length=280, blank=True)
     level = models.IntegerField(blank=True, default=0)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.title} - {self.code}'
@@ -80,10 +82,12 @@ class Good(models.Model):
     dimensions = models.TextField(blank=True)
     materials = models.TextField(blank=True)
     extra_info = models.TextField(blank=True)
+    is_new = models.BooleanField(default=False)
     is_main = models.BooleanField(default=False)
     is_popular = models.BooleanField(default=False)
     is_discount = models.BooleanField(default=False)
     brand = models.ForeignKey(CategoryBrand, on_delete=models.CASCADE, blank=True, null=True)
+    stock = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return f'{self.category} --> {self.title} --> {self.color.title} --> {self.size.title}'
