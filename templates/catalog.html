@@ -167,118 +167,121 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="sidebar-style ml-30">
-                            <div class="sidebar-widget">
-                                <h4 class="pro-sidebar-title"> Поиск </h4>
-                                <div class="pro-sidebar-search mb-50 mt-25">
-                                    <form class="pro-sidebar-search-form" action="/catalog/{{ active_category.id }}">
-                                        <input name="q" type="text" placeholder="Поиск ..." {% if q %} value="{{ q }}" {% endif %}>
-                                        <button>
-                                            <i class="sli sli-magnifier"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="sidebar-widget">
-                                <h4 class="pro-sidebar-title">Refine By </h4>
-                                <div class="sidebar-widget-list mt-30">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox"> <a href="#">On Sale <span>4</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">New <span>5</span></a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">In Stock <span>6</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-widget mt-45">
-                                <h4 class="pro-sidebar-title">Filter By Price </h4>
-                                <div class="price-filter mt-10">
-                                    <div class="price-slider-amount">
-                                        <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                            <form class="pro-sidebar-search-form" action="/catalog/{{ active_category.id }}">
+                                <div class="sidebar-widget">
+                                    <h4 class="pro-sidebar-title"> Поиск </h4>
+                                    <div class="pro-sidebar-search mb-50 mt-25">
+                                        <div class="pro-sidebar-search-form">
+                                            <input name="q" type="text" placeholder="Поиск ..." {% if q %} value="{{ q }}" {% endif %}>
+                                            <button>
+                                                <i class="sli sli-magnifier"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div id="slider-range"></div>
                                 </div>
-                            </div>
-
-                            {% if brands %}
-                                <div class="sidebar-widget mt-50">
-                                    <h4 class="pro-sidebar-title"> Brands </h4>
-                                    <div class="sidebar-widget-list mt-20">
+                                <div class="sidebar-widget">
+                                    <h4 class="pro-sidebar-title">Refine By </h4>
+                                    <div class="sidebar-widget-list mt-30">
                                         <ul>
-                                            {% for brand in brands %}
-                                                <li>
-                                                    <div class="sidebar-widget-list-left">
-                                                        <input type="checkbox" value=""><a href="#"> {{ brand.title }} <span>0</span></a>
-                                                        <span class="checkmark"></span>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+                                                    <input type="checkbox"> <a href="#">On Sale <span>4</span> </a>
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+                                                    <input type="checkbox" value=""> <a href="#">New <span>5</span></a>
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="sidebar-widget-list-left">
+                                                    <input type="checkbox" value=""> <a href="#">In Stock <span>6</span> </a>
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                            {% endif %}
-
-                            {% if colors %}
-                                <div class="sidebar-widget mt-50">
-                                    <h4 class="pro-sidebar-title"> Colour </h4>
-                                    <div class="sidebar-widget-list mt-20">
-                                        <ul>
-                                            {% for color in colors %}
-                                                <li>
-                                                    <div class="sidebar-widget-list-left">
-                                                        <input type="checkbox" value=""><a href="#"> {{ color.title }} <span> 0 </span></a>
-                                                        <span class="checkmark"></span>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
+                                <div class="sidebar-widget mt-45">
+                                    <h4 class="pro-sidebar-title">Filter By Price </h4>
+                                    <div class="price-filter mt-10">
+                                        <div class="price-slider-amount">
+                                            <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                        </div>
+                                        <div id="slider-range"></div>
                                     </div>
                                 </div>
-                            {% endif %}
 
-                            {% if sizes %}
-                                <div class="sidebar-widget mt-40">
-                                    <h4 class="pro-sidebar-title"> Size </h4>
-                                    <div class="sidebar-widget-list mt-20">
-                                        <ul>
-                                            {% for size in sizes %}
-                                                <li>
-                                                    <div class="sidebar-widget-list-left">
-                                                        <input type="checkbox" value=""><a href="#"> {{ size.title }} <span>4</span></a>
-                                                        <span class="checkmark"></span>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
+                                {% if brands %}
+                                    <div class="sidebar-widget mt-50">
+                                        <h4 class="pro-sidebar-title"> Brands </h4>
+                                        <div class="sidebar-widget-list mt-20">
+                                            <ul>
+                                                {% for brand in brands %}
+                                                    <li>
+                                                        <div class="sidebar-widget-list-left">
+                                                            <input name="active_brand" type="checkbox" {% if brand.id in active_brands %} checked="checked" {% endif %} value="{{ brand.id }}"><a href="#"> {{ brand.title }} <span>0</span></a>
+                                                            <span class="checkmark"></span>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
+                                {% endif %}
 
-                            {% if tags %}
-                                <div class="sidebar-widget mt-50">
-                                    <h4 class="pro-sidebar-title"> Tag </h4>
-                                    <div class="sidebar-widget-tag mt-25">
-                                        <ul>
-                                            {% for tag in tags %}
-                                                <li><a href="#"> {{ tag.title }} </a></li>
-                                            {% endfor %}
-                                        </ul>
+                                {% if colors %}
+                                    <div class="sidebar-widget mt-50">
+                                        <h4 class="pro-sidebar-title"> Colour </h4>
+                                        <div class="sidebar-widget-list mt-20">
+                                            <ul>
+                                                {% for color in colors %}
+                                                    <li>
+                                                        <div class="sidebar-widget-list-left">
+                                                            <input name="active_color" type="checkbox" {% if color.id in active_colors %} checked="checked" {% endif %} value="{{ color.id }}"><a href="#"> {{ color.title }} <span> 0 </span></a>
+                                                            <span class="checkmark"></span>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
+                                {% endif %}
+
+                                {% if sizes %}
+                                    <div class="sidebar-widget mt-40">
+                                        <h4 class="pro-sidebar-title"> Size </h4>
+                                        <div class="sidebar-widget-list mt-20">
+                                            <ul>
+                                                {% for size in sizes %}
+                                                    <li>
+                                                        <div class="sidebar-widget-list-left">
+                                                            <input name="active_size" type="checkbox" {% if size.id in active_sizes %} checked="checked" {% endif %} value="{{ size.id }}"><a href="#"> {{ size.title }} <span>4</span></a>
+                                                            <span class="checkmark"></span>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if tags %}
+                                    <div class="sidebar-widget mt-50">
+                                        <h4 class="pro-sidebar-title"> Tag </h4>
+                                        <div class="sidebar-widget-tag mt-25">
+                                            <ul>
+                                                {% for tag in tags %}
+                                                    <li><a href="#"> {{ tag.title }} </a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <button style="background-color: red; color: white; border: 0; height: 40px;"> Применить </button>
+                            </form>
                         </div>
                     </div>
                 </div>
