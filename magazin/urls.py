@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexHandler),
     path('catalog/', catalogHandler),
+    path('catalog/<int:catalog_id>/', catalogItemHandler),
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT
