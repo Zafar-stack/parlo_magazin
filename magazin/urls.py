@@ -23,6 +23,7 @@ from main.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexHandler),
+    path('catalog/', catalogHandler),
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT

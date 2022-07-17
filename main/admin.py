@@ -13,3 +13,5 @@ admin.site.register(Size, AdminModelSingle)
 admin.site.register(Tag, AdminModelSingle)
 admin.site.register(Category, AdminModelSingle)
 admin.site.register(Good, AdminModelSingle)
+admin.site.register(CategoryBrand, AdminModelSingle)
+

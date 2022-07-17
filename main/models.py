@@ -48,6 +48,15 @@ class Category(models.Model):
         return result_title
 
 
+class CategoryBrand(models.Model) :
+    title = models.CharField(max_length=200, blank=True)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    level = models.IntegerField(default=0, blank=True)
+
+    def __str__(self):
+        return f'{self.category.title} --> {self.title}'
+
+
 class Good(models.Model):
     title = models.CharField(max_length=200, blank=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
@@ -74,9 +83,9 @@ class Good(models.Model):
     is_main = models.BooleanField(default=False)
     is_popular = models.BooleanField(default=False)
     is_discount = models.BooleanField(default=False)
-    #brand = models.ForeignKey(CategoryBrand, on_delete=models.CASCADE, blank=True, null=True)
+    brand = models.ForeignKey(CategoryBrand, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.category} + "-->" + {self.title} + "-->" + {self.color.title} + "-->" + {self.size.title}'
+        return f'{self.category} --> {self.title} --> {self.color.title} --> {self.size.title}'
 
 
