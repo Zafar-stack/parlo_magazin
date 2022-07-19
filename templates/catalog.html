@@ -70,8 +70,10 @@
                                                             <div class="ht-product-categories"><a href="#"> {{ good.brand.title }} </a></div>
                                                             <h4 class="ht-product-title"><a href="/good/{{  good.id }}/"> {{ good.title }} </a></h4>
                                                             <div class="ht-product-price">
-                                                                <span class="new">$ {{ good.old_price }}</span>
-                                                                <span class="old">$ {{ good.price }} </span>
+                                                                <span class="new">$ {{ good.price }}</span>
+                                                                {% if good.old_price != good.price %}
+                                                                <span class="old">$ {{ good.old_price }} </span>
+                                                                {% endif %}
                                                             </div>
                                                             <div class="ht-product-ratting-wrap">
                                                                 <span class="ht-product-ratting">
@@ -132,7 +134,9 @@
                                                             <div class="shop-list-price-ratting">
                                                                 <div class="ht-product-list-price">
                                                                     <span class="new"> $ {{ good.price }} </span>
+                                                                    {% if good.old_price != good.price %}
                                                                     <span class="old"> $ {{ good.old_price }} </span>
+                                                                    {% endif %}
                                                                 </div>
                                                                 <div class="ht-product-list-ratting">
                                                                     <i class="sli sli-star"></i>
