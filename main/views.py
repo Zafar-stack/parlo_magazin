@@ -106,7 +106,7 @@ def catalogItemHandler(request, catalog_id):
                 new_goods.append(g)
         goods = new_goods
 
-    limit = request.GET.get('limit', 9)
+    limit = int(request.GET.get('limit', 9))
     current_page = int(request.GET.get('page', 0))
     total = len(goods)
     pages_count = ceil(total / limit)
@@ -119,7 +119,7 @@ def catalogItemHandler(request, catalog_id):
         next_page = current_page + 1
 
     return render(request, 'catalog.html', {'categories': categories,
-                                            'goods': goods[start:stop],
+                                            'goods': goods,
                                             'brands': brands,
                                             'colors': colors,
                                             'sizes': sizes,
@@ -141,5 +141,15 @@ def catalogItemHandler(request, catalog_id):
                                             'start': start,
                                             'stop': stop,
                                             })
+
+
+def goodHandler(request, good_id):
+    categories = Category.objects.all()
+    active_good = Good.objects.get(id=good_id)
+
+    return render(request, 'product-details.html', {'categories': categories,
+                                                    'active_good': active_good,
+
+                                                    })
 
 

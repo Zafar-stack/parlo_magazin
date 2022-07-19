@@ -68,7 +68,7 @@
                                                     <div class="ht-product-content">
                                                         <div class="ht-product-content-inner">
                                                             <div class="ht-product-categories"><a href="#"> {{ good.brand.title }} </a></div>
-                                                            <h4 class="ht-product-title"><a href="product-details.html"> {{ good.title }} </a></h4>
+                                                            <h4 class="ht-product-title"><a href="/good/{{  good.id }}/"> {{ good.title }} </a></h4>
                                                             <div class="ht-product-price">
                                                                 <span class="new">$ {{ good.old_price }}</span>
                                                                 <span class="old">$ {{ good.price }} </span>
@@ -125,7 +125,7 @@
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 align-self-center">
                                                     <div class="shop-list-content">
-                                                        <h3><a href="product-details.html"> {{ good.title }} </a></h3>
+                                                        <h3><a href="/good/{{ good.id }}/"> {{ good.title }} </a></h3>
                                                         <p> {{ good.mini_description }} </p>
                                                         <span> {{ good.brand.title }} </span>
                                                         <div class="shop-list-price-action-wrap">
