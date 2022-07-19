@@ -34,7 +34,7 @@
                                         <option value="">In stock</option>
                                     </select>
                                 </div>
-                                <p>Showing 1–12 of 20 result</p>
+                                <p>Показано {{ start }}–{{ stop }} из {{ total }} найденных</p>
                             </div>
                             <div class="shop-tab nav">
                                 <a class="active" href="#shop-1" data-toggle="tab">
@@ -157,10 +157,15 @@
                             </div>
                             <div class="pro-pagination-style text-center mt-30">
                                 <ul>
-                                    <li><a class="prev" href="#"><i class="sli sli-arrow-left"></i></a></li>
-                                    <li><a class="active" href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a class="next" href="#"><i class="sli sli-arrow-right"></i></a></li>
+                                    {% if current_page != 1 %}
+                                        <li><a class="prev" href="/catalog/{{ active_category.id }}?page={{ prev_page }}"><i class="sli sli-arrow-left"></i></a></li>
+                                    {% endif %}
+                                    {% for p in pages %}
+                                        <li><a {% if current_page == p %} class="active" {% endif %} href="/catalog/{{ active_category.id }}?page={{ p }}"> {{ p }} </a></li>
+                                    {% endfor %}
+                                    {% if next_page %}
+                                        <li><a class="next" href="/catalog/{{ active_category.id }}?page={{ next_page }}"><i class="sli sli-arrow-right"></i></a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -172,7 +177,7 @@
                                     <h4 class="pro-sidebar-title"> Поиск </h4>
                                     <div class="pro-sidebar-search mb-50 mt-25">
                                         <div class="pro-sidebar-search-form">
-                                            <input name="q" type="text" placeholder="Поиск ..." {% if q %} value="{{ q }}" {% endif %}>
+                                            <input name="q" type="text" placeholder="Поиск ..." {% if search_value %} value="{{ search_value }}" {% endif %}>
                                             <button>
                                                 <i class="sli sli-magnifier"></i>
                                             </button>
@@ -180,24 +185,24 @@
                                     </div>
                                 </div>
                                 <div class="sidebar-widget">
-                                    <h4 class="pro-sidebar-title">Refine By </h4>
+                                    <h4 class="pro-sidebar-title"> По признакам </h4>
                                     <div class="sidebar-widget-list mt-30">
                                         <ul>
                                             <li>
                                                 <div class="sidebar-widget-list-left">
-                                                    <input type="checkbox"> <a href="#">On Sale <span>4</span> </a>
+                                                    <input type="checkbox" name="is_discount" {% if is_discount %} checked {% endif %} value="1"><a href="#"> Скидки <span>0</span></a>
                                                     <span class="checkmark"></span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="sidebar-widget-list-left">
-                                                    <input type="checkbox" value=""> <a href="#">New <span>5</span></a>
+                                                    <input type="checkbox" name="is_new" {% if is_new %} checked {% endif %} value="1"><a href="#"> Новые <span>0</span></a>
                                                     <span class="checkmark"></span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="sidebar-widget-list-left">
-                                                    <input type="checkbox" value=""> <a href="#">In Stock <span>6</span> </a>
+                                                    <input type="checkbox" name="stock" {% if stock %} checked {% endif %} value="1"><a href="#"> В наличии <span>0</span></a>
                                                     <span class="checkmark"></span>
                                                 </div>
                                             </li>
@@ -208,7 +213,7 @@
                                     <h4 class="pro-sidebar-title">Filter By Price </h4>
                                     <div class="price-filter mt-10">
                                         <div class="price-slider-amount">
-                                            <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                            <input type="text" id="amount" name="price"  placeholder="Введите вашу цену" />
                                         </div>
                                         <div id="slider-range"></div>
                                     </div>
