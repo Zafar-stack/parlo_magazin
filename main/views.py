@@ -146,9 +146,11 @@ def catalogItemHandler(request, catalog_id):
 def goodHandler(request, good_id):
     categories = Category.objects.all()
     active_good = Good.objects.get(id=good_id)
+    related_products = Good.objects.filter(category__id=active_good.category.id).exclude(id=good_id)
 
     return render(request, 'product-details.html', {'categories': categories,
                                                     'active_good': active_good,
+                                                    'related_products': related_products,
 
                                                     })
 

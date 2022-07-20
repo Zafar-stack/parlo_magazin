@@ -24,7 +24,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product-details-img">
                         <div class="zoompro-border zoompro-span">
-                            <img class="zoompro" src="/media/{{ active_good.logo }}/" data-zoom-image="/static/img/product-details/product-detalis-bl1.jpg" alt=""/>
+                            <img class="zoompro" src="/media/{{ active_good.logo }}/" data-zoom-image="/media/{{ active_good.logo }}" alt=""/>
                             <span>-29%</span>
                             <div class="product-video">
                                 <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
@@ -154,24 +154,23 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="description-review-wrapper">
                         <div class="description-review-topbar nav">
-                            <a class="active" data-toggle="tab" href="#des-details1">Description</a>
-                            <a data-toggle="tab" href="#des-details3">Additional information</a>
-                            <a data-toggle="tab" href="#des-details2">Reviews (3)</a>
+                            <a class="active" data-toggle="tab" href="#des-details1">Описание</a>
+                            <a data-toggle="tab" href="#des-details3">Дополнительная информация</a>
+                            <a data-toggle="tab" href="#des-details2">Отзывы (0)</a>
                         </div>
                         <div class="tab-content description-review-bottom">
                             <div id="des-details1" class="tab-pane active">
                                 <div class="product-description-wrapper">
-                                    <p>Pellentesque orci lectus, bibendum iaculis aliquet id, ullamcorper nec ipsum. In laoreet ligula vitae tristique viverra. Suspendisse augue nunc, laoreet in arcu ut, vulputate malesuada justo. Donec porttitor elit justo, sed lobortis nulla interdum et. Sed lobortis sapien ut augue condimentum, eget ullamcorper nibh lobortis. Cras ut bibendum libero. Quisque in nisl nisl. Mauris vestibulum leo nec pellentesque sollicitudin.</p>
-                                    <p>Pellentesque lacus eros, venenatis in iaculis nec, luctus at eros. Phasellus id gravida magna. Maecenas fringilla auctor diam consectetur placerat. Suspendisse non convallis ligula. Aenean sagittis eu erat quis efficitur. Maecenas volutpat erat ac varius bibendum. Ut tincidunt, sem id tristique commodo, nunc diam suscipit lectus, vel</p>
+                                    <p> {{ active_good.mini_description }} </p>
                                 </div>
                             </div>
                             <div id="des-details3" class="tab-pane">
                                 <div class="product-anotherinfo-wrapper">
                                     <ul>
-                                        <li><span>Weight</span> 400 g</li>
-                                        <li><span>Dimensions</span>10 x 10 x 15 cm </li>
-                                        <li><span>Materials</span> 60% cotton, 40% polyester</li>
-                                        <li><span>Other Info</span> American heirloom jean shorts pug seitan letterpress</li>
+                                        <li><span>Вес</span> 400 g</li>
+                                        <li><span>Габариты</span>10 x 10 x 15 cm </li>
+                                        <li><span>Материалы</span> 60% cotton, 40% polyester</li>
+                                        <li><span>Другие</span> American heirloom jean shorts pug seitan letterpress</li>
                                     </ul>
                                 </div>
                             </div>
@@ -304,7 +303,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="pro-dec-banner">
-                        <a href="#"><img src="/static/img/banner/banner-15.png" alt=""></a>
+                        <a href="#"><img src="/media/{{ active_good.logo }}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -318,11 +317,11 @@
             </div>
             <div class="arrivals-wrap scroll-zoom">
                 <div class="ht-products product-slider-active owl-carousel">
-                    <!--Product Start-->
+                    {% for rg in related_products %}
                     <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
                         <div class="ht-product-inner">
                             <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="/static/img/product/product-5.svg" alt="Universal Product Style"> </a>
+                                <a href="product-details.html" class="ht-product-image"><img src="/media/{{ rg.logo}}" alt="Universal Product Style"></a>
                                 <div class="ht-product-action">
                                     <ul>
                                         <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
@@ -334,10 +333,10 @@
                             </div>
                             <div class="ht-product-content">
                                 <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Clock</a></div>
-                                    <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
+                                    <div class="ht-product-categories"><a href="/catalog/{{ rg.category.id }}"> {{ rg.brand.title }} </a></div>
+                                    <h4 class="ht-product-title"><a href="#"> {{ rg.title }} </a></h4>
                                     <div class="ht-product-price">
-                                        <span class="new">$60.00</span>
+                                        <span class="new"> {{ rg.price }}</span>
                                     </div>
                                     <div class="ht-product-ratting-wrap">
                                         <span class="ht-product-ratting">
@@ -370,222 +369,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--Product End-->
-                    <!--Product Start-->
-                    <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
-                        <div class="ht-product-inner">
-                            <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="/static/img/product/product-6.svg" alt="Universal Product Style"> </a>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ht-product-content">
-                                <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Lamp </a></div>
-                                    <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
-                                    <div class="ht-product-price">
-                                        <span class="new">$50.00</span>
-                                        <span class="old">$80.00</span>
-                                    </div>
-                                    <div class="ht-product-ratting-wrap">
-                                        <span class="ht-product-ratting">
-                                            <span class="ht-product-user-ratting" style="width: 90%;">
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                            </span>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="ht-product-countdown-wrap">
-                                    <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Product End-->
-                    <!--Product Start-->
-                    <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
-                        <div class="ht-product-inner">
-                            <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="/static/img/product/product-7.svg" alt="Universal Product Style"> </a>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ht-product-content">
-                                <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Chair</a></div>
-                                    <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
-                                    <div class="ht-product-price">
-                                        <span class="new">$30.00</span>
-                                    </div>
-                                    <div class="ht-product-ratting-wrap">
-                                        <span class="ht-product-ratting">
-                                            <span class="ht-product-user-ratting" style="width: 100%;">
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                            </span>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="ht-product-countdown-wrap">
-                                    <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Product End-->
-                    <!--Product Start-->
-                    <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
-                        <div class="ht-product-inner">
-                            <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="/static/img/product/product-8.svg" alt="Universal Product Style"> </a>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ht-product-content">
-                                <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Chair</a></div>
-                                    <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
-                                    <div class="ht-product-price">
-                                        <span class="new">$60.00</span>
-                                        <span class="old">$90.00</span>
-                                    </div>
-                                    <div class="ht-product-ratting-wrap">
-                                        <span class="ht-product-ratting">
-                                            <span class="ht-product-user-ratting" style="width: 100%;">
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                            </span>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="ht-product-countdown-wrap">
-                                    <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Product End-->
-                    <!--Product Start-->
-                    <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
-                        <div class="ht-product-inner">
-                            <div class="ht-product-image-wrap">
-                                <a href="product-details.html" class="ht-product-image"> <img src="/static/img/product/product-6.svg" alt="Universal Product Style"> </a>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="ht-product-content">
-                                <div class="ht-product-content-inner">
-                                    <div class="ht-product-categories"><a href="#">Lamp </a></div>
-                                    <h4 class="ht-product-title"><a href="#">Demo Product Name</a></h4>
-                                    <div class="ht-product-price">
-                                        <span class="new">$50.00</span>
-                                        <span class="old">$80.00</span>
-                                    </div>
-                                    <div class="ht-product-ratting-wrap">
-                                        <span class="ht-product-ratting">
-                                            <span class="ht-product-user-ratting" style="width: 90%;">
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                                <i class="sli sli-star"></i>
-                                            </span>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="ht-product-action">
-                                    <ul>
-                                        <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="ht-product-countdown-wrap">
-                                    <div class="ht-product-countdown" data-countdown="2020/01/01"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Product End-->
+                    {% endfor %}
                 </div>
             </div>
         </div>
