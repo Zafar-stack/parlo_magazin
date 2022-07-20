@@ -157,14 +157,67 @@ def goodHandler(request, good_id):
 
 
 def cartHandler(request):
+    if not request.session.session_key:
+        request.session.create()
+    user_session_id = request.session.session_key
+
     categories = Category.objects.all()
 
     if request.POST:
         return_url = request.POST.get('return_url', '')
+        action = request.POST.get('action', '')
+
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        new_cart = None
+        if open_carts:
+            new_cart = open_carts[0]
+        else:
+            new_cart = Cart()
+            new_cart.session_id = user_session_id
+            new_cart.save()
+
+        if action == 'add_to_cart':
+            good_id = int(request.POST.get('good_id', 0))
+            amount = float(request.POST.get('amount', 0))
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0).filter(good__id=good_id)
+            print('*'*100)
+            print(cart_items)
+
+            if cart_items:
+                new_cart_item = cart_items[0]
+                new_cart_item.amount = new_cart_item.amount + amount
+                new_cart_item.save()
+            else:
+                new_cart_item = CartItem()
+                new_cart_item.good_id = good_id
+                new_cart_item.cart_id = new_cart.id
+                new_cart_item.amount = amount
+                new_cart_item.price = new_cart_item.good.price
+                new_cart_item.save()
+
+        if action in ['add_to_cart']:
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+            all_price = 0
+            all_amount = 0
+            all_orig_price = 0
+            if cart_items:
+                for ci in cart_items:
+                    all_amount += ci.amount
+                    all_orig_price += ci.amount + ci.price
+
+            new_cart.orig_price = all_orig_price
+
+            all_price = all_orig_price * (100 - new_cart.discount) / 100
+            new_cart.amount = all_amount
+            new_cart.orig_price = all_orig_price
+            new_cart.price = all_price
+            new_cart.save()
 
         if return_url:
             return redirect(return_url)
 
-    return render(request, 'cart-page.html', {"categories": categories,
+    return render(request, 'cart-page.html', {'categories': categories,
 
                                               })
+
+
