@@ -122,6 +122,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     amount = models.FloatField(default=0)
     price = models.FloatField(default=0)
+    all_price = models.FloatField(default=0)
     status = models.IntegerField(default=0)
 
     def __str__(self):

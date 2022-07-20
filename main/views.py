@@ -9,20 +9,52 @@ from django.shortcuts import redirect
 def indexHandler(request):
     categories = Category.objects.all()
 
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
     return render(request, 'index-3.html', {'categories': categories,
+                                            'new_cart': new_cart,
+                                            'cart_items': cart_items,
 
                                             })
-
-
 def catalogHandler(request):
     categories = Category.objects.all()
 
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
     return render(request, 'catalog.html', {'categories': categories,
+                                            'new_cart': new_cart,
+                                            'cart_items': cart_items,
 
                                             })
 
 
 def catalogItemHandler(request, catalog_id):
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
     active_category = Category.objects.get(id=catalog_id)
     categories = Category.objects.all()
     goods = Good.objects.filter(category__id=catalog_id)
@@ -141,10 +173,22 @@ def catalogItemHandler(request, catalog_id):
                                             'total': total,
                                             'start': start,
                                             'stop': stop,
+                                            'new_cart': new_cart,
+                                            'cart_items': cart_items,
                                             })
 
 
 def goodHandler(request, good_id):
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
     categories = Category.objects.all()
     active_good = Good.objects.get(id=good_id)
     related_products = Good.objects.filter(category__id=active_good.category.id).exclude(id=good_id)
@@ -152,6 +196,8 @@ def goodHandler(request, good_id):
     return render(request, 'product-details.html', {'categories': categories,
                                                     'active_good': active_good,
                                                     'related_products': related_products,
+                                                    'new_cart': new_cart,
+                                                    'cart_items': cart_items,
 
                                                     })
 
@@ -163,18 +209,22 @@ def cartHandler(request):
 
     categories = Category.objects.all()
 
+    open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+    new_cart = None
+    if open_carts:
+        new_cart = open_carts[0]
+    else:
+        new_cart = Cart()
+        new_cart.session_id = user_session_id
+        new_cart.save()
+
+    print('*'*100)
+    print(new_cart)
+
+
     if request.POST:
         return_url = request.POST.get('return_url', '')
         action = request.POST.get('action', '')
-
-        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
-        new_cart = None
-        if open_carts:
-            new_cart = open_carts[0]
-        else:
-            new_cart = Cart()
-            new_cart.session_id = user_session_id
-            new_cart.save()
 
         if action == 'add_to_cart':
             good_id = int(request.POST.get('good_id', 0))
@@ -186,6 +236,7 @@ def cartHandler(request):
             if cart_items:
                 new_cart_item = cart_items[0]
                 new_cart_item.amount = new_cart_item.amount + amount
+                new_cart_item.all_price = new_cart_item.price * new_cart_item.amount
                 new_cart_item.save()
             else:
                 new_cart_item = CartItem()
@@ -193,6 +244,7 @@ def cartHandler(request):
                 new_cart_item.cart_id = new_cart.id
                 new_cart_item.amount = amount
                 new_cart_item.price = new_cart_item.good.price
+                new_cart_item.all_price = new_cart_item.price * new_cart_item.amount
                 new_cart_item.save()
 
         if action in ['add_to_cart']:
@@ -203,7 +255,7 @@ def cartHandler(request):
             if cart_items:
                 for ci in cart_items:
                     all_amount += ci.amount
-                    all_orig_price += ci.amount + ci.price
+                    all_orig_price += ci.amount * ci.price
 
             new_cart.orig_price = all_orig_price
 
@@ -216,7 +268,11 @@ def cartHandler(request):
         if return_url:
             return redirect(return_url)
 
-    return render(request, 'cart-page.html', {'categories': categories,
+    cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    return render(request, 'cart-page.html', {'new_cart': new_cart,
+                                              'cart_items': cart_items,
+                                              'categories': categories,
 
                                               })
 

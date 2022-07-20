@@ -48,7 +48,7 @@
                             <nav>
                                 <ul>
                                     <li class="angle-shape"><a href="/"> Home </a></li>
-                                    <li class="angle-shape"><a href="shop.html"> Shop <span>new</span> </a>
+                                    <li class="angle-shape"><a href="#"> Shop <span>new</span> </a>
                                         <ul class="mega-menu">
                                             {% for cat in categories %}
                                                 {% if not cat.parent %}
@@ -102,11 +102,9 @@
                                 <button class="icon-cart-active">
                                     <span class="icon-cart">
                                         <i class="sli sli-bag"></i>
-                                        <span class="count-style">02</span>
+                                        <span class="count-style"> {{ new_cart.amount }} </span>
                                     </span>
-                                    <span class="cart-price">
-                                        $320.00
-                                    </span>
+                                    <span class="cart-price"> {{ new_cart.price }} </span>
                                 </button>
                                 <div class="shopping-cart-content">
                                     <div class="shopping-cart-top">
@@ -114,38 +112,28 @@
                                         <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                     </div>
                                     <ul>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="/static/img/cart/cart-1.svg"></a>
-                                                <div class="item-close">
-                                                    <a href="#"><i class="sli sli-close"></i></a>
+                                        {% for cit in cart_items %}
+                                            <li class="single-shopping-cart">
+                                                <div class="shopping-cart-img">
+                                                    <a href="#"><img alt="" src="/media/{{ cit.good.logo }}"></a>
+                                                    <div class="item-close">
+                                                        <a href="#"><i class="sli sli-close"></i></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product Name </a></h4>
-                                                <span>1 x 90.00</span>
-                                            </div>
-                                        </li>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="/static/img/cart/cart-2.svg"></a>
-                                                <div class="item-close">
-                                                    <a href="#"><i class="sli sli-close"></i></a>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="#"> {{ cit.good.title }} </a></h4>
+                                                    <span> {{ cit.amount }} x {{ cit.price }} </span>
                                                 </div>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product Name</a></h4>
-                                                <span>1 x 90.00</span>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                     <div class="shopping-cart-bottom">
                                         <div class="shopping-cart-total">
-                                            <h4>Total : <span class="shop-total">$260.00</span></h4>
+                                            <h4>Total : <span class="shop-total"> {% if new_cart %} {{ new_cart.price }} {% else %} 0 {% endif %} </span></h4>
                                         </div>
                                         <div class="shopping-cart-btn btn-hover text-center">
                                             <a class="default-btn" href="checkout.html">checkout</a>
-                                            <a class="default-btn" href="cart-page.html">view cart</a>
+                                            <a class="default-btn" href="/cart/">view cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -221,11 +209,9 @@
                                 <button class="icon-cart-active">
                                     <span class="icon-cart">
                                         <i class="sli sli-bag"></i>
-                                        <span class="count-style">02</span>
+                                        <span class="count-style"> {{ new_cart.amount }} </span>
                                     </span>
-                                    <span class="cart-price">
-                                        $320.00
-                                    </span>
+                                    <span class="cart-price"> {{ new_cart.price }} </span>
                                 </button>
                                 <div class="shopping-cart-content">
                                     <div class="shopping-cart-top">
@@ -233,24 +219,17 @@
                                         <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                     </div>
                                     <ul>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="/static/img/cart/cart-1.svg"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product Name </a></h4>
-                                                <span>1 x 90.00</span>
-                                            </div>
-                                        </li>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="/static/img/cart/cart-2.svg"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product Name</a></h4>
-                                                <span>1 x 90.00</span>
-                                            </div>
-                                        </li>
+                                        {% for cit in cart_items %}
+                                            <li class="single-shopping-cart">
+                                                <div class="shopping-cart-img">
+                                                    <a href="#"><img alt="" src="/media/{{ cit.good.logo }}"></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="#"> {{ cit.good.title }} </a></h4>
+                                                    <span> {{ cit.amount }} x {{ cit.price }} </span>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                     <div class="shopping-cart-bottom">
                                         <div class="shopping-cart-total">
@@ -258,7 +237,7 @@
                                         </div>
                                         <div class="shopping-cart-btn btn-hover text-center">
                                             <a class="default-btn" href="checkout.html">checkout</a>
-                                            <a class="default-btn" href="cart-page.html">view cart</a>
+                                            <a class="default-btn" href="/cart/">view cart</a>
                                         </div>
                                     </div>
                                 </div>
