@@ -106,7 +106,7 @@ class Cart(models.Model):
     address = models.CharField(max_length=200, blank=True)
     is_accepted = models.BooleanField(default=False)
     is_payed = models.BooleanField(default=False)
-    status = models.IntegerField(default=0) #0 - created, 1 - declained, 2 - confirmed
+    status = models.IntegerField(default=0) #0 - created, -1 - declained, 1 - confirmed
     session_id = models.CharField(max_length=200, blank=True)
     amount = models.FloatField(default=0)
     discount = models.FloatField(default=0)

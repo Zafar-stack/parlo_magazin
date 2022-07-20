@@ -29,7 +29,7 @@
                             <div class="product-video">
                                 <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
                                     <i class="sli sli-control-play"></i>
-                                    View Video
+                                    Смотреть видео
                                 </a>
                             </div>
                         </div>
@@ -107,20 +107,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pro-details-quality">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                        <form action="/cart/" method="post">{% csrf_token %}
+                            <div class="pro-details-quality">
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" type="text" name="amount" value="1">
+                                </div>
+                                <input type="hidden" name="action" value="add_to_cart">
+                                <input type="hidden" name="good_id" value="{{ active_good.id }}">
+                                <input type="hidden" name="return_url" value="/good/{{ active_good.id }}/">
+                                <div class="pro-details-cart btn-hover">
+                                    <button href="#">Добавить в корзину</button>
+                                </div>
+                                <div class="pro-details-wishlist">
+                                    <a title="Добавить в избранные" href="#"><i class="sli sli-heart"></i></a>
+                                </div>
+                                <div class="pro-details-compare">
+                                    <a title="Добавить для сравнения" href="#"><i class="sli sli-refresh"></i></a>
+                                </div>
                             </div>
-                            <div class="pro-details-cart btn-hover">
-                                <a href="#">Add To Cart</a>
-                            </div>
-                            <div class="pro-details-wishlist">
-                                <a title="Add To Wishlist" href="#"><i class="sli sli-heart"></i></a>
-                            </div>
-                            <div class="pro-details-compare">
-                                <a title="Add To Compare" href="#"><i class="sli sli-refresh"></i></a>
-                            </div>
-                        </div>
+                        </form>
                         <div class="pro-details-meta">
                             <span>Категории :</span>
                             <ul>
@@ -312,8 +317,8 @@
     <div class="product-area pb-70">
         <div class="container">
             <div class="section-title text-center pb-60">
-                <h2>Related products</h2>
-                <p> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical</p>
+                <h2> Похожие продукты </h2>
+                <p> Выбирайте понравившиеся вам продукты ниже </p>
             </div>
             <div class="arrivals-wrap scroll-zoom">
                 <div class="ht-products product-slider-active owl-carousel">
@@ -325,9 +330,9 @@
                                 <div class="ht-product-action">
                                     <ul>
                                         <li><a href="#" data-toggle="modal" data-target="#exampleModal"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Добавить в избранные</span></a></li>
+                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Добавить для сравнения</span></a></li>
+                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Добавить в корзину</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -358,9 +363,9 @@
                                 <div class="ht-product-action">
                                     <ul>
                                         <li><a href="#"><i class="sli sli-magnifier"></i><span class="ht-product-action-tooltip">Quick View</span></a></li>
-                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Add to Wishlist</span></a></li>
-                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Add to Compare</span></a></li>
-                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Add to Cart</span></a></li>
+                                        <li><a href="#"><i class="sli sli-heart"></i><span class="ht-product-action-tooltip">Добавить в избранные</span></a></li>
+                                        <li><a href="#"><i class="sli sli-refresh"></i><span class="ht-product-action-tooltip">Добавить для сравнения</span></a></li>
+                                        <li><a href="#"><i class="sli sli-bag"></i><span class="ht-product-action-tooltip">Добавить в корзину</span></a></li>
                                     </ul>
                                 </div>
                                 <div class="ht-product-countdown-wrap">

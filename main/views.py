@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from main.models import *
 from math import ceil
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -155,3 +156,15 @@ def goodHandler(request, good_id):
                                                     })
 
 
+def cartHandler(request):
+    categories = Category.objects.all()
+
+    if request.POST:
+        return_url = request.POST.get('return_url', '')
+
+        if return_url:
+            return redirect(return_url)
+
+    return render(request, 'cart-page.html', {"categories": categories,
+
+                                              })
