@@ -275,6 +275,14 @@ def cartHandler(request):
             new_cart.status = 1
             new_cart.save()
 
+        if action == 'accepted':
+            order_id = int(request.POST.get('order_id' , 0))
+            if request.user.is_authenticated:
+                main_order = Cart.objects.get(id=order_id)
+                if main_order:
+                    main_order.status = 2
+                    main_order.save()
+
         if action in ['add_to_cart', 'remove_from_cart', 'clear_cart']:
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
             all_price = 0
@@ -344,4 +352,37 @@ def checkoutsuccessHandler(request):
 
                                                      })
 
+
+def ordersHandler(request):
+    categories = Category.objects.all()
+    new_cart = None
+    cart_items = []
+    confirmed_orders = []
+    if request.user.is_authenticated:
+        confirmed_orders = Cart.objects.filter(status__gte=1)
+
+    return render(request, 'orders.html', {'categories': categories,
+                                            'cart_items': [],
+                                            'confirmed_orders': confirmed_orders,
+
+                                            })
+
+
+def ordersItemHandler(request, order_id):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    order_items = []
+    if request.user.is_authenticated:
+        order_items = CartItem.objects.filter(cart__id=order_id)
+        main_order = Cart.objects.get(id=order_id)
+
+    return render(request, 'order_item.html', {'categories': categories,
+                                               'cart': new_cart,
+                                               'cart_items': cart_items,
+                                               'order_items': order_items,
+                                               'main_order': main_order,
+                                               })
 

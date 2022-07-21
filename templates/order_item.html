@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="breadcrumb-area pt-35 pb-35 bg-gray">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+                <ul>
+                    <li>
+                        <a href="/">Главная</a>
+                    </li>
+                    <li class="active">Оформить</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="checkout-main-area pt-70 pb-70">
+        <div class="container">
+            <div class="checkout-wrap pt-30">
+                <form action="/orders/" method="post">{% csrf_token %}
+                    <div class="row">
+                            <input type="hidden" name="return_url" value="/orders/">
+                            <input type="hidden" name="action" value="accepted">
+                            <input type="hidden" name="order_id" value="{{ main_order.id }}">
+                            <div class="col-lg-7">
+                                <div class="billing-info-wrap mr-50">
+                                    <h3>Детали клиента</h3>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="billing-info mb-20">
+                                                <label>Имя<abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="first_name" required value="{{ main_order.first_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="billing-info mb-20">
+                                                <label>Фамилия<abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="last_name" required value="{{ main_order.last_name }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="billing-select mb-20">
+                                                <label>Страна</label>
+                                                <input type="text" name="country" value="{{ main_order.country }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Область / Город <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="city" required value="{{ main_order.city }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Адрес <abbr class="required" title="required">*</abbr></label>
+                                                <input class="billing-address" placeholder="Адрес, улица, номер квартиры" name="address" type="text" value="{{ main_order.address }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Почтовый индекс / zip номер <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="zip_code" value="{{ main_order.zip_code }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Номер телефона <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="phone" value="{{ main_order.phone }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Электронная почта <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" name="email" value="{{ main_order.email }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="additional-info-wrap">
+                                        <label> Комментарии </label>
+                                        <textarea placeholder="Ваши пожелания" name="title">{{ main_order.title }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                            <div class="your-order-area">
+                                <h3>Ваши заказы</h3>
+                                <div class="your-order-wrap gray-bg-4">
+                                    <div class="your-order-info-wrap">
+                                        <div class="your-order-info">
+                                            <ul>
+                                                <li>Товары <span>Итого</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="your-order-middle">
+                                            <ul>
+                                                {% for cit in order_items %}
+                                                    <li>{{ cit.good.title }}  X  {{ cit.amount }} <span>{{ cit.all_price }} </span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="your-order-info order-subtotal">
+                                            <ul>
+                                                <li>Общий итог <span>{{ main_order.price }} </span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Place-order mt-40">
+                                    <button href="#">Оформить заказ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
