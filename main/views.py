@@ -2,6 +2,7 @@ from django.shortcuts import render
 from main.models import *
 from math import ceil
 from django.shortcuts import redirect
+from datetime import datetime
 
 # Create your views here.
 
@@ -24,6 +25,8 @@ def indexHandler(request):
                                             'cart_items': cart_items,
 
                                             })
+
+
 def catalogHandler(request):
     categories = Category.objects.all()
 
@@ -258,6 +261,20 @@ def cartHandler(request):
             for ci in cart_items:
                 ci.delete()
 
+        if action == 'checkout':
+            new_cart.title = request.POST.get('title', '')
+            new_cart.first_name = request.POST.get('first_name', '')
+            new_cart.last_name = request.POST.get('last_name', '')
+            new_cart.country = request.POST.get('country', '')
+            new_cart.city = request.POST.get('city', '')
+            new_cart.address = request.POST.get('address', '')
+            new_cart.zip_code = request.POST.get('zip_code', '')
+            new_cart.phone = request.POST.get('phone', '')
+            new_cart.email = request.POST.get('email', '')
+            new_cart.created_at = datetime.now()
+            new_cart.status = 1
+            new_cart.save()
+
         if action in ['add_to_cart', 'remove_from_cart', 'clear_cart']:
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
             all_price = 0
@@ -286,5 +303,45 @@ def cartHandler(request):
                                               'categories': categories,
 
                                               })
+
+
+def checkoutHandler(request):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    return render(request, 'checkout.html', {'categories': categories,
+                                            'new_cart': new_cart,
+                                            'cart_items': cart_items,
+
+                                            })
+
+
+def checkoutsuccessHandler(request):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    return render(request, 'checkout_success.html', {'categories': categories,
+                                                     'new_cart': new_cart,
+                                                     'cart_items': cart_items,
+
+                                                     })
 
 

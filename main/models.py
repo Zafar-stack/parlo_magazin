@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -112,6 +113,7 @@ class Cart(models.Model):
     discount = models.FloatField(default=0)
     orig_price = models.FloatField(default=0)
     price = models.FloatField(default=0)
+    created_at = models.DateTimeField(default=datetime.now())
 
     def __str__(self):
         return f'{self.session_id} {self.last_name}'

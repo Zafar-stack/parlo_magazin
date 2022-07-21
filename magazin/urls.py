@@ -27,6 +27,8 @@ urlpatterns = [
     path('catalog/<int:catalog_id>/', catalogItemHandler),
     path('good/<int:good_id>/', goodHandler),
     path('cart/', cartHandler),
+    path('checkout/', checkoutHandler),
+    path('checkout/success/', checkoutsuccessHandler),
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT

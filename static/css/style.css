@@ -7331,8 +7331,9 @@ h3.cart-page-title {
           margin: 0; }
       .your-order-area .your-order-wrap .payment-method .sin-payment.sin-payment-3 input {
         margin-top: 18px; }
-  .your-order-area .Place-order a {
+  .your-order-area .Place-order a, .your-order-area .Place-order button {
     background-color: #ff3535;
+    border: none;
     font-size: 12px;
     display: block;
     cursor: pointer;
@@ -7344,7 +7345,7 @@ h3.cart-page-title {
     font-size: 13px;
     font-weight: 600l;
     text-align: center; }
-    .your-order-area .Place-order a:hover {
+    .your-order-area .Place-order a:hover, .your-order-area .Place-order button:hover {
       background-color: #212529; }
 
 @media only screen and (max-width: 767px) {
