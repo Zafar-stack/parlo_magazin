@@ -5861,6 +5861,15 @@ h3.cart-page-title {
         margin: 0 13px; }
         .cart-table-content table tbody > tr td.product-remove a:hover {
           color: #ff3535; }
+
+          .cart-table-content table tbody > tr td.product-remove button {
+          border: none;
+          background-color: white;
+        font-size: 17px;
+        margin: 0 13px; }
+        .cart-table-content table tbody > tr td.product-remove button:hover {
+          color: #ff3535; }
+
     .cart-table-content table tbody > tr td.product-wishlist-cart > a {
       background-color: #ff3535;
       color: #fff;
@@ -5898,6 +5907,25 @@ h3.cart-page-title {
     line-height: 1;
     padding: 18px 40px 17px;
     text-transform: uppercase; }
+
+    .cart-shiping-update-wrapper .cart-shiping-update > a,
+  .cart-shiping-update-wrapper .cart-clear > form > button,
+  .cart-shiping-update-wrapper .cart-clear > a {
+    background-color: #f2f2f2;
+    display: inline-block;
+    font-size: 13px;
+    border: none;
+    font-weight: 600;
+    line-height: 1;
+    padding: 18px 40px 17px;
+    text-transform: uppercase; }
+
+    .cart-shiping-update-wrapper .cart-shiping-update > a:hover,
+    .cart-shiping-update-wrapper .cart-clear > form > button:hover,
+    .cart-shiping-update-wrapper .cart-clear > a:hover {
+      background-color: #ff3535;
+      color: #fff; }
+
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .cart-shiping-update-wrapper .cart-shiping-update > a,
       .cart-shiping-update-wrapper .cart-clear > button,

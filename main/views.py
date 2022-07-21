@@ -247,7 +247,18 @@ def cartHandler(request):
                 new_cart_item.all_price = new_cart_item.price * new_cart_item.amount
                 new_cart_item.save()
 
-        if action in ['add_to_cart']:
+        if action == 'remove_from_cart':
+            good_id = int(request.POST.get('good_id', 0))
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0).filter(good__id=good_id)
+            for ci in cart_items:
+                ci.delete()
+
+        if action == 'clear_cart':
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+            for ci in cart_items:
+                ci.delete()
+
+        if action in ['add_to_cart', 'remove_from_cart', 'clear_cart']:
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
             all_price = 0
             all_amount = 0
