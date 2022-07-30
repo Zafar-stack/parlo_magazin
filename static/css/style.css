@@ -2746,7 +2746,7 @@ textarea:focus {
   .single-banner .banner-content-2 h4 {
     font-weight: bold;
     font-size: 18px;
-    letter-spacing: .3px;
+    letter-spacing: 3px;
     margin: 0;
     line-height: 1;
     text-transform: uppercase; }
@@ -4008,13 +4008,23 @@ textarea:focus {
         .product-details-content .pro-details-quality .pro-details-cart a {
           padding: 22px 22px 22px; } }
       .product-details-content .pro-details-quality .pro-details-cart a:hover {
-        border: none; }z
+        border: none; }
   .product-details-content .pro-details-quality .pro-details-wishlist a {
     font-size: 18px;
     color: #1f2226; }
     .product-details-content .pro-details-quality .pro-details-wishlist a:hover {
       color: #ff3535; }
-  .product-details-content .pro-details-quality .pro-details-compare a {
+
+    .product-details-content .pro-details-quality .pro-details-wishlist button {
+    font-size: 18px;
+      border: none;
+      background-color: white;
+    color: #1f2226; }
+    .product-details-content .pro-details-quality .pro-details-wishlist button:hover {
+      color: #ff3535; }
+
+
+.product-details-content .pro-details-quality .pro-details-compare a {
     font-size: 18px;
     margin-left: 25px; }
     @media only screen and (max-width: 767px) {
@@ -4022,6 +4032,18 @@ textarea:focus {
         margin-left: 10px; } }
     .product-details-content .pro-details-quality .pro-details-compare a:hover {
       color: #ff3535; }
+
+.product-details-content .pro-details-quality .pro-details-compare button {
+    font-size: 18px;
+    border: none;
+    background-color: white;
+    margin-left: 25px; }
+    @media only screen and (max-width: 767px) {
+      .product-details-content .pro-details-quality .pro-details-compare button {
+        margin-left: 10px; } }
+    .product-details-content .pro-details-quality .pro-details-compare button:hover {
+      color: #ff3535; }
+
 
 .product-details-content .pro-details-meta {
   display: -webkit-box;

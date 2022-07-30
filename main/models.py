@@ -131,3 +131,21 @@ class CartItem(models.Model):
         return f'{self.cart.id} {self.good.title} {self.amount}'
 
 
+class CompareItem(models.Model):
+    good = models.ForeignKey(Good, on_delete=models.CASCADE)
+    session_id = models.CharField(max_length=200, blank=True)
+    status = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.session_id} {self.good.title}'
+
+
+class WishItem(models.Model):
+    good = models.ForeignKey(Good, on_delete=models.CASCADE)
+    session_id = models.CharField(max_length=200, blank=True)
+    status = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.session_id} {self.good.title}'
+
+

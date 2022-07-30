@@ -16,4 +16,5 @@ admin.site.register(Good, AdminModelSingle)
 admin.site.register(CategoryBrand, AdminModelSingle)
 admin.site.register(Cart, AdminModelSingle)
 admin.site.register(CartItem, AdminModelSingle)
-
+admin.site.register(CompareItem, AdminModelSingle)
+admin.site.register(WishItem, AdminModelSingle)

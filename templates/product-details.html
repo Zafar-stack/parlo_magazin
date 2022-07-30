@@ -107,25 +107,35 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="/cart/" method="post">{% csrf_token %}
                             <div class="pro-details-quality">
-                                <div class="cart-plus-minus">
-                                    <input class="cart-plus-minus-box" type="text" name="amount" value="1">
-                                </div>
-                                <input type="hidden" name="action" value="add_to_cart">
-                                <input type="hidden" name="good_id" value="{{ active_good.id }}">
-                                <input type="hidden" name="return_url" value="/good/{{ active_good.id }}/">
-                                <div class="pro-details-cart btn-hover">
-                                    <button href="#">Добавить в корзину</button>
-                                </div>
-                                <div class="pro-details-wishlist">
-                                    <a title="Добавить в избранные" href="#"><i class="sli sli-heart"></i></a>
-                                </div>
-                                <div class="pro-details-compare">
-                                    <a title="Добавить для сравнения" href="#"><i class="sli sli-refresh"></i></a>
-                                </div>
+                                <form action="/cart/" method="post">{% csrf_token %}
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" type="text" name="amount" value="1">
+                                    </div>
+                                    <input type="hidden" name="action" value="add_to_cart">
+                                    <input type="hidden" name="good_id" value="{{ active_good.id }}">
+                                    <input type="hidden" name="return_url" value="/good/{{ active_good.id }}/">
+                                    <div class="pro-details-cart btn-hover">
+                                        <button href="#">Добавить в корзину</button>
+                                    </div>
+                                </form>
+                                <form action="/cart/" method="post">{% csrf_token %}
+                                    <input type="hidden" name="action" value="add_to_wish_list">
+                                    <input type="hidden" name="good_id" value="{{ active_good.id }}">
+                                    <input type="hidden" name="return_url" value="/good/{{ active_good.id }}/">
+                                    <div class="pro-details-wishlist">
+                                        <button title="Добавить в избранные" href="#"><i class="sli sli-heart"></i></button>
+                                    </div>
+                                </form>
+                                <form action="/cart/" method="post">{% csrf_token %}
+                                    <input type="hidden" name="action" value="add_to_compare_list">
+                                    <input type="hidden" name="good_id" value="{{ active_good.id }}">
+                                    <input type="hidden" name="return_url" value="/good/{{ active_good.id }}/">
+                                    <div class="pro-details-compare">
+                                        <button title="Добавить для сравнения" href="#"><i class="sli sli-refresh"></i></button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
                         <div class="pro-details-meta">
                             <span>Категории :</span>
                             <ul>

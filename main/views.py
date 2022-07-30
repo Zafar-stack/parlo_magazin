@@ -82,6 +82,7 @@ def catalogItemHandler(request, catalog_id):
 
     price = request.GET.get('price', None)
     price_start, price_stop = None, None
+
     if price and len(price.split('-')) == 2:
         price_start = int(price.split('-')[0])
         price_stop = int(price.split('-')[1])
@@ -192,6 +193,7 @@ def goodHandler(request, good_id):
         if open_carts:
             new_cart = open_carts[0]
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
     categories = Category.objects.all()
     active_good = Good.objects.get(id=good_id)
     related_products = Good.objects.filter(category__id=active_good.category.id).exclude(id=good_id)
@@ -276,12 +278,34 @@ def cartHandler(request):
             new_cart.save()
 
         if action == 'accepted':
-            order_id = int(request.POST.get('order_id' , 0))
+            order_id = int(request.POST.get('order_id', 0))
             if request.user.is_authenticated:
                 main_order = Cart.objects.get(id=order_id)
                 if main_order:
                     main_order.status = 2
                     main_order.save()
+
+        if action == 'add_to_compare_list':
+            good_id = int(request.POST.get('good_id', 0))
+            compareItems = CompareItem.objects.filter(good__id=good_id).filter(session_id=user_session_id)
+            if compareItems:
+                pass
+            else:
+                compare_item = CompareItem()
+                compare_item.session_id = user_session_id
+                compare_item.good_id = good_id
+                compare_item.save()
+
+        if action == 'add_to_wish_list':
+            good_id = int(request.POST.get('good_id', 0))
+            wishItems = WishItem.objects.filter(good__id=good_id).filter(session_id=user_session_id)
+            if wishItems:
+                pass
+            else:
+                wish_item = WishItem()
+                wish_item.session_id = user_session_id
+                wish_item.good_id = good_id
+                wish_item.save()
 
         if action in ['add_to_cart', 'remove_from_cart', 'clear_cart']:
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
@@ -384,5 +408,47 @@ def ordersItemHandler(request, order_id):
                                                'cart_items': cart_items,
                                                'order_items': order_items,
                                                'main_order': main_order,
+
                                                })
+
+
+def compareHandler(request):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    return render(request, 'compare.html', {'categories': categories,
+                                            'new_cart': new_cart,
+                                            'cart_items': cart_items,
+
+                                            })
+
+
+def wishHandler(request):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    return render(request, 'wish.html', {'categories': categories,
+                                         'new_cart': new_cart,
+                                         'cart_items': cart_items,
+
+                                         })
+
 

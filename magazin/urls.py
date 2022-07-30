@@ -31,6 +31,8 @@ urlpatterns = [
     path('checkout/success/', checkoutsuccessHandler),
     path('orders/', ordersHandler),
     path('orders/<int:order_id>/', ordersItemHandler),
+    path('wish/', wishHandler),
+    path('compare/', compareHandler),
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT
