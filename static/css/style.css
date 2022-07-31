@@ -3809,6 +3809,66 @@ textarea:focus {
     .product-details-content .pro-details-rating-wrap span a:hover {
       color: #000; }
 
+
+
+
+
+
+
+
+
+
+
+ .product-details-content .pro-details-rating-wrap{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .product-details-content .pro-details-rating-wrap .pro-details-rating {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    margin-left: -3px;
+    margin-right: -3px; }
+    .product-details-content .pro-details-rating-wrap .pro-details-rating i {
+      font-size: 16px;
+      line-height: 14px;
+      font-weight: 400;
+      padding-left: 3px;
+      padding-right: 5px;
+      color: #aaaaaa; }
+      .product-details-content .pro-details-rating-wrap .pro-details-rating i:last-child {
+        margin-right: 0; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .product-details-content .pro-details-rating-wrap .pro-details-ratting i {
+          font-size: 14px; } }
+    .product-details-content .pro-details-rating-wrap .pro-details-rating .pro-details-user-ratting {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      overflow: hidden;
+      position: absolute;
+      left: 5px;
+      top: 0;
+      z-index: 3;
+      margin-left: -5px;
+      margin-right: -5px; }
+      .product-details-content .pro-details-rating-wrap .pro-details-rating .pro-details-user-ratting i {
+        color: #e7a415; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .product-details-content p {
   font-size: 14px;
   line-height: 28px;
@@ -6062,7 +6122,7 @@ h3.cart-page-title {
         .discount-code-wrapper .tax-wrapper .tax-select-wrapper .tax-select select {
           -moz-appearance: none;
           -webkit-appearance: none;
-          background: #fff url("../..//static/img/icon-img/cart.png") no-repeat scroll right 18px center;
+          background: #fff url("/static/img/icon-img/cart.png") no-repeat scroll right 18px center;
           border: 1px solid #ebebeb;
           -webkit-box-shadow: none;
           box-shadow: none;

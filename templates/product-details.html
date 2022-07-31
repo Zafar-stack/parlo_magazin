@@ -61,11 +61,28 @@
                         </div>
                         <div class="pro-details-rating-wrap">
                             <div class="pro-details-rating">
-                                <i class="sli sli-star yellow"></i>
-                                <i class="sli sli-star yellow"></i>
-                                <i class="sli sli-star yellow"></i>
-                                <i class="sli sli-star yellow"></i>
-                                <i class="sli sli-star yellow"></i>
+                                <span class="pro-details-user-ratting" style="width: 100%;">
+                                    {% if active_good.rating > 0 %}
+                                        <i class="sli sli-star yellow"></i>
+                                    {% endif %}
+                                    {% if active_good.rating > 1 %}
+                                        <i class="sli sli-star yellow"></i>
+                                    {% endif %}
+                                    {% if active_good.rating > 2 %}
+                                        <i class="sli sli-star yellow"></i>
+                                    {% endif %}
+                                    {% if active_good.rating > 3 %}
+                                        <i class="sli sli-star yellow"></i>
+                                    {% endif %}
+                                    {% if active_good.rating > 4 %}
+                                        <i class="sli sli-star yellow"></i>
+                                    {% endif %}
+                                </span>
+                            <i class="sli sli-star"></i>
+                            <i class="sli sli-star"></i>
+                            <i class="sli sli-star"></i>
+                            <i class="sli sli-star"></i>
+                            <i class="sli sli-star"></i>
                             </div>
                             <span><a href="#">0 Reviews</a></span>
                         </div>

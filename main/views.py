@@ -20,9 +20,16 @@ def indexHandler(request):
             new_cart = open_carts[0]
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
 
+    new_popular_goods = Good.objects.filter(is_new=True).filter(is_popular=True)[:5]
+    main_categories = Category.objects.all()
+    new_goods = Good.objects.filter(is_new=True)[:8]
+
     return render(request, 'index-3.html', {'categories': categories,
                                             'new_cart': new_cart,
                                             'cart_items': cart_items,
+                                            'new_popular_goods': new_popular_goods,
+                                            'main_categories': main_categories,
+                                            'new_goods': new_goods,
 
                                             })
 
