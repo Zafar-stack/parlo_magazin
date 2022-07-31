@@ -5902,10 +5902,25 @@ h3.cart-page-title {
       text-transform: uppercase; }
       .cart-table-content table tbody > tr td.product-wishlist-cart > a:hover {
         background-color: #1f2226; }
+
+     .cart-table-content table tbody > tr td.product-wishlist-cart > form > button {
+      background-color: #ff3535;
+      color: #fff;
+       border: none;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+      padding: 7px 12px;
+      text-transform: uppercase; }
+      .cart-table-content table tbody > tr td.product-wishlist-cart > form > button:hover {
+        background-color: #1f2226; }
+
     .cart-table-content table tbody > tr td {
       font-size: 16px;
       padding: 30px 0;
       text-align: center; }
+
+
 
 .cart-shiping-update-wrapper {
   display: -webkit-box;

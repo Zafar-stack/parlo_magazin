@@ -456,6 +456,7 @@ def wishHandler(request):
 
     new_cart = None
     cart_items = []
+    wish_list = []
 
     user_session_id = request.session.session_key
     if user_session_id:
@@ -464,9 +465,12 @@ def wishHandler(request):
             new_cart = open_carts[0]
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
 
+        wish_list = WishItem.objects.filter(session_id=user_session_id)
+
     return render(request, 'wish.html', {'categories': categories,
                                          'new_cart': new_cart,
                                          'cart_items': cart_items,
+                                         'wish_list': wish_list,
 
                                          })
 
