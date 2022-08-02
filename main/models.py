@@ -149,3 +149,11 @@ class WishItem(models.Model):
         return f'{self.session_id} {self.good.title}'
 
 
+class Subscriber(models.Model):
+    email = models.CharField(max_length=200)
+    status = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.email}'
+
+

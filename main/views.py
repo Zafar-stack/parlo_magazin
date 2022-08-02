@@ -328,6 +328,15 @@ def cartHandler(request):
                 for ci in wish_items:
                     ci.delete()
 
+        if action == 'subscribe':
+            email = request.POST.get('email', '')
+            if email:
+                subscriber_list = Subscriber.objects.filter(email=email)
+                if not subscriber_list:
+                    subscriber = Subscriber()
+                    subscriber.email = email
+                    subscriber.save()
+
         if action in ['add_to_cart', 'remove_from_cart', 'clear_cart']:
             cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
             all_price = 0
@@ -480,5 +489,31 @@ def wishHandler(request):
                                          'wish_list': wish_list,
 
                                          })
+
+
+def searchHandler(request):
+    categories = Category.objects.all()
+
+    new_cart = None
+    cart_items = []
+
+    user_session_id = request.session.session_key
+    if user_session_id:
+        open_carts = Cart.objects.filter(session_id=user_session_id).filter(status=0)
+        if open_carts:
+            new_cart = open_carts[0]
+            cart_items = CartItem.objects.filter(cart__id=new_cart.id).filter(status=0)
+
+    search_items = []
+    search_value = request.GET.get('q', None)
+    if search_value:
+        search_items = Good.objects.filter(title__contains=search_value)
+
+    return render(request, 'search.html', {'categories': categories,
+                                           'new_cart': new_cart,
+                                           'cart_items': cart_items,
+                                           'search_items': search_items,
+
+                                           })
 
 

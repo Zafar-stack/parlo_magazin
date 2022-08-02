@@ -102,7 +102,7 @@
                     <div class="col-xl-3 col-lg-3">
                         <div class="header-right-wrap pt-40">
                             <div class="header-search">
-                                <a class="search-active" href="#"><i class="sli sli-magnifier"></i></a>
+                                <a id="arabutton" class="search-active" href="#"><i class="sli sli-magnifier"></i></a>
                             </div>
                             <div class="cart-wrap">
                                 <button class="icon-cart-active">
@@ -188,9 +188,9 @@
                     <button class="search-close"><span class="sli sli-close"></span></button>
                 </div>
                 <div class="sidebar-search-input">
-                    <form>
+                    <form action="/search/" method="GET">
                         <div class="form-search">
-                            <input id="search" class="input-text" value="" placeholder="Search Now" type="search">
+                            <input id="search" name="q" class="input-text" value="" placeholder="Поиск" type="search" autofocus>
                             <button>
                                 <i class="sli sli-magnifier"></i>
                             </button>
@@ -397,12 +397,11 @@
                             <div class="subscribe-style mt-45">
                                 <p>Подписывайтесь чтобы получать уведомления</p>
                                 <div id="mc_embed_signup" class="subscribe-form mt-20">
-                                    <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style" novalidate="" target="_blank" name="mc-embedded-subscribe-form" method="post" action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
+                                    <form class="validate subscribe-form-style" novalidate="" name="mc-embedded-subscribe-form" method="post" action="/cart/">{% csrf_token %}
+                                        <input type="hidden" name="action" value="subscribe">
+                                        <input type="hidden" name="return_url" value="/">
                                         <div id="mc_embed_signup_scroll" class="mc-form">
-                                            <input class="email" type="email" required="" placeholder="Введите почту ..." name="EMAIL" value="">
-                                            <div class="mc-news" aria-hidden="true">
-                                                <input type="text" value="" tabindex="-1" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
-                                            </div>
+                                            <input class="email" type="email" required="" placeholder="Введите почту ..." name="email" value="">
                                             <div class="clear">
                                                 <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="">
                                             </div>
@@ -486,7 +485,11 @@
 
 <!-- All JS is here
 ============================================ -->
-
+<script>
+ document.getElementById("arabutton").addEventListener("click", function(){
+     setTimeout(function() { jQuery('#search').focus() }, 20);
+});
+</script>
 <!-- jQuery JS -->
 <script src="/static/js/vendor/jquery-1.12.4.min.js"></script>
 <!-- Popper JS -->

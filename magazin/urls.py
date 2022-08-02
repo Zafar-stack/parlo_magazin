@@ -33,6 +33,7 @@ urlpatterns = [
     path('orders/<int:order_id>/', ordersItemHandler),
     path('wish/', wishHandler),
     path('compare/', compareHandler),
+    path('search/', searchHandler),
 
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT
