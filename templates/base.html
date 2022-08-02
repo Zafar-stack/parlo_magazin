@@ -52,7 +52,7 @@
                                         <ul class="mega-menu">
                                             {% for cat in categories %}
                                                 {% if not cat.parent %}
-                                                    <li><a class="menu-title" href="#"> {{ cat.title }} </a>
+                                                    <li><a class="menu-title" href="/catalog/{{ cat.id }}/"> {{ cat.title }} </a>
                                                         <ul>
                                                             {% for cat_child in categories %}
                                                                 {% if cat_child.parent and cat_child.parent.id == cat.id %}
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="setting-wrap">
+                            <!--div class="setting-wrap">
                                 <button class="setting-active">
                                     <i class="sli sli-settings"></i>
                                 </button>
@@ -177,7 +177,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div-->
                         </div>
                     </div>
                 </div>

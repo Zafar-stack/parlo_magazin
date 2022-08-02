@@ -68,6 +68,15 @@ def catalogItemHandler(request, catalog_id):
     active_category = Category.objects.get(id=catalog_id)
     categories = Category.objects.all()
     goods = Good.objects.filter(category__id=catalog_id)
+
+    sub_categories = Category.objects.filter(parent__id=catalog_id)
+    if sub_categories and not goods:
+        sub_category_ids = []
+        for sub in sub_categories:
+            sub_category_ids.append(sub.id)
+        goods = Good.objects.filter(category__id__in=sub_category_ids)
+
+
     brands = CategoryBrand.objects.filter(category__id=catalog_id)
     colors = Color.objects.filter(category__id=catalog_id)
     sizes = Size.objects.filter(category__id=catalog_id)
